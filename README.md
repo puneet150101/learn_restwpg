@@ -1,0 +1,1 @@
+# A demo project with Spring Boot, JDBC, REST api and PostgreSQL
