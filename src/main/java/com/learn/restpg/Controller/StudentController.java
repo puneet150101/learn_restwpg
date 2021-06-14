@@ -37,20 +37,20 @@ public class StudentController {
     @PostMapping(path = "/student", consumes = { "application/x-www-form-urlencoded", "multipart/form-data" })
     public Student save(Student student) {
         
-        return repo.save(student.getSid(),student.getSname());
+        return repo.save(student);
     }
 
     // create new student in db with json or xml
     @PostMapping(path = "/student", consumes = { "application/json", "application/xml" })
     public Student saveinjson(@RequestBody Student student) {
         
-        return repo.save(student.getSid(),student.getSname());
+        return repo.save(student);
     }
 
     // delete student by their sid
     @DeleteMapping("/student/{sid}")
     public String delete(@PathVariable("sid") int sid) {
-        Student student = repo.findById(sid).orElse(new Student());
+        Student student = repo.findById(sid).orElse(new Student(-1,"",-1));
         if (student.getSid() != -1) {
             repo.delete(student);
             return "deleted" + " " + student.getSname();
@@ -61,13 +61,17 @@ public class StudentController {
     // update or create new student entry
     @PutMapping(path = "/student", consumes = { "application/x-www-form-urlencoded", "multipart/form-data" })
     public Student updateStudent(Student student) {
-        repo.save(student);
-        return student;
+        if(repo.findById(student.getSid()).isPresent()){
+            return repo.save(student);
+        }
+        else return new Student(-1,"Not found",-1);
     }
 
     @PutMapping(path = "/student", consumes = { "application/json", "application/xml" })
     public Student updateStudentjson(@RequestBody Student student) {
-        repo.save(student);
-        return student;
+        if(repo.findById(student.getSid()).isPresent()){
+            return repo.save(student);
+        }
+        else return new Student(-1,"Not found",-1);
     }
 }

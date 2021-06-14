@@ -17,6 +17,6 @@ public class Student {
     private String sname;
     // private String firstName;
     // private String lastName;
-    // private Integer sclass;
+    private Integer sclass;
     // private Integer monthlyFees;
 }
