@@ -1,6 +1,6 @@
 # A demo project with Spring Boot, JDBC, REST api and PostgreSQL
 * Database created on **Postgres** with following config<br>
-    * Url = "jdbc:postgres://localhost:5432/test"
+    * Url = "jdbc:postgres://localhost:6543/test2"
     * Table name =  student
 * Sample table
 
