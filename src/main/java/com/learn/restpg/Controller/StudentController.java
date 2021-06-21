@@ -1,10 +1,8 @@
 package com.learn.restpg.Controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.learn.restpg.Model.Student;
-import com.learn.restpg.Services.StudentService;
+import com.learn.restpg.Service.Outcome;
+import com.learn.restpg.Service.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,62 +25,57 @@ public class StudentController {
     // fetch student by its sid
     @GetMapping(path = "/student/{sid}")
     public ResponseEntity<?> getbyidEntity(@PathVariable("sid") int sid) {
-        log.info("Inside the get by ID method.");
-        Optional<Student> student = studentService.getbyid(sid);
-        log.info("Student found:{}", student);
-        return ResponseEntity.ok(student);
+        log.trace("Inside the get by ID method.");
+        return ResponseEntity.ok(studentService.getbyid(sid));
     }
 
     // fetch all students
     @GetMapping("/students")
     public ResponseEntity<?> getallEntity() {
-        log.info("Inside get all method");
-        List<Student> students = studentService.getall();
-        log.info("Found the list of students:{}", students);
-        return ResponseEntity.ok(students);
+        log.trace("Inside get all method");
+        Outcome<?> outcome = studentService.getall();
+        log.info("Found the list of students:{}", outcome.getData());
+        return ResponseEntity.ok(outcome);
     }
 
     // create new student in database with form format
     @PostMapping(path = "/student", consumes = { "application/x-www-form-urlencoded", "multipart/form-data" })
     public ResponseEntity<?> saveStudentEntity(Student student) {
-        log.info("Inside save student entity.");
-        Student studentSaved = studentService.saveStudent(student);
-        log.info("Student saved with info:{}", studentSaved);
-        return ResponseEntity.ok(studentSaved);
+        log.trace("Inside save student entity.");
+        Outcome<?> outcome = studentService.saveStudent(student);
+        log.info("Student saved with info:{}", outcome.getData());
+        return ResponseEntity.ok(outcome);
     }
 
     // create new student in db with json or xml
     @PostMapping(path = "/student", consumes = { "application/json", "application/xml" })
     public ResponseEntity<?> saveStudentInJsonEntity(@RequestBody Student student) {
-        log.info("Inside save student in json.");
-        Student studentSaved = studentService.saveStudent(student);
-        log.info("Student saved with info:{}", studentSaved);
-        return ResponseEntity.ok(studentSaved);
+        log.trace("Inside save student in json.");
+        Outcome<?> outcome = studentService.saveStudent(student);
+        log.info("Student saved with info:{}", outcome.getData());
+        return ResponseEntity.ok(outcome);
     }
 
     // delete student by their sid
     @DeleteMapping("/student/{sid}")
     public ResponseEntity<?> deleteEntity(@PathVariable("sid") int sid) {
-        log.info("Inside delete student entity.");
-        String response = studentService.delete(sid);
-        log.info("Control returned to the entity.");
-        return ResponseEntity.ok(response);
+        log.trace("Inside delete student entity.");
+        Outcome<?> outcome = studentService.delete(sid);
+        return ResponseEntity.ok(outcome);
     }
 
     // update or create new student entry
     @PutMapping(path = "/student", consumes = { "application/x-www-form-urlencoded", "multipart/form-data" })
     public ResponseEntity<?> updateStudentEntity(Student student) {
-        log.info("Inside update student entity.");
-        Student updatedStudent = studentService.updateStudent(student);
-        log.info("Student update finshed.");
-        return ResponseEntity.ok(updatedStudent);
+        log.trace("Inside update student entity.");
+        Outcome<?> outcome = studentService.updateStudent(student);
+        return ResponseEntity.ok(outcome);
     }
 
     @PutMapping(path = "/student", consumes = { "application/json", "application/xml" })
     public ResponseEntity<?> updateStudentjsonEntity(@RequestBody Student student) {
-        log.info("Inside update student entity.");
-        Student updatedStudent = studentService.updateStudent(student);
-        log.info("Student update finshed.");
-        return ResponseEntity.ok(updatedStudent);
+        log.trace("Inside update student entity.");
+        Outcome<?> outcome = studentService.updateStudent(student);
+        return ResponseEntity.ok(outcome);
     }
 }
