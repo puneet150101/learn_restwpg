@@ -31,3 +31,13 @@
 - **Post API** - Can accept data in JSON, XML, and form format with API localhost:8080/student. No need to mention sid as sid is set to serial. May cause error if tried to pass an sid by own.
 - **Delete API** - localhost:8080/student/(sid) to delete student by sid. Return deleted (student name) if entry found else return not found.
 - **Put API** - localhost:8080/student, only updates the existing entry by sid. Return a not found object if data don't exist.
+
+## Security Layer added
+
+- **Admin** -  has access to all Http methods.
+  - ID - admin
+  - Pass - admin
+- **User** - has access to only GET methods.
+  - ID - user
+  - Pass - user
+- Use **Basic Auth** in **Authorization** while using POSTMAN to input login info.
