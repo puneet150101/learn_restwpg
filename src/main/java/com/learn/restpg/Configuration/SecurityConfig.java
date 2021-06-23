@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers(HttpMethod.GET,"/students").hasAnyRole("USER","ADMIN")
         .antMatchers(HttpMethod.GET,"/student/*").hasAnyRole("USER","ADMIN")
         .antMatchers("/**").hasRole("ADMIN")
-        .and().httpBasic();
+        .and().formLogin();
     }
     
     @Bean
