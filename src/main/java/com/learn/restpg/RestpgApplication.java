@@ -8,6 +8,7 @@ public class RestpgApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestpgApplication.class, args);
+		
 	}
 
 }

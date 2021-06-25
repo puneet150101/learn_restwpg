@@ -1,6 +1,8 @@
 package com.learn.restpg.Controller;
 
+import com.learn.restpg.Model.LoginInfo;
 import com.learn.restpg.Model.Student;
+import com.learn.restpg.Service.LoginService;
 import com.learn.restpg.Service.Outcome;
 import com.learn.restpg.Service.StudentService;
 
@@ -21,6 +23,21 @@ import lombok.extern.slf4j.Slf4j;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private LoginService loginService;
+    
+    @PostMapping(path="/auth",consumes = {"application/x-www-form-urlencoded","multipart/form-data" })
+    public ResponseEntity<?> authEntity(LoginInfo loginInfo) throws Exception{
+        log.trace("Inside Generate Jwt api method.");
+        return ResponseEntity.ok(loginService.genJwtOutcome(loginInfo));
+	}
+
+    @PostMapping(path="/auth",consumes = { "application/json", "application/xml" })
+    public ResponseEntity<?> authbyjsonEntity(@RequestBody LoginInfo loginInfo) throws Exception{
+        log.trace("Inside Generate Jwt by Json api method.");
+        return ResponseEntity.ok(loginService.genJwtOutcome(loginInfo));
+	}
 
     // fetch student by its sid
     @GetMapping(path = "/student/{sid}")
