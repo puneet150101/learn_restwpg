@@ -71,5 +71,4 @@ public class StudentService {
             return Outcome.builder().status("Failed").response("No such entry").data(student).build();
         }
     }
-
 }

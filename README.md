@@ -41,3 +41,8 @@
   - ID - user
   - Pass - user
 - Use **Basic Auth** in **Authorization** while using POSTMAN to input login info.
+
+## JWT Supoort Added
+- Send a post request from Postman on "localhost:8080/auth" with username and password as headers in body.
+- Generated token will be valid for 10 hours.
+- Either user the **Authorization** header with **"Bearer "**+ generated token or enter the authoriazation in Postman. 
