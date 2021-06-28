@@ -40,9 +40,14 @@
 - **User** - has access to only GET methods.
   - ID - user
   - Pass - user
-- Use **Basic Auth** in **Authorization** while using POSTMAN to input login info.
+- Use username and password headers and post them in localhost:8080/auth to get your login token.
+- **BCryptPasswordEncyptor added**.
 
 ## JWT Supoort Added
 - Send a post request from Postman on "localhost:8080/auth" with username and password as headers in body.
 - Generated token will be valid for 10 hours.
 - Either user the **Authorization** header with **"Bearer "**+ generated token or enter the authoriazation in Postman. 
+
+## New features
+- Added feature to add users on api /adduser via post method (only admin has access).
+- Default username/password for admin is 'admin'/'admin'.

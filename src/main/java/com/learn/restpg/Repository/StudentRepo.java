@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepo extends CrudRepository<Student,Integer>{
     // @Query("insert into student (sname,sclass) values (:sname,:sclass) returning *")
     // Student save(@Param("sname") String sname);
+    // @Query("insert into users values(:username,:password,true);insert")
+    // void adduser()
 }

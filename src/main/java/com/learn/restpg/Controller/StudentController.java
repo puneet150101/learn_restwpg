@@ -2,6 +2,7 @@ package com.learn.restpg.Controller;
 
 import com.learn.restpg.Model.LoginInfo;
 import com.learn.restpg.Model.Student;
+import com.learn.restpg.Model.UserInfo;
 import com.learn.restpg.Service.LoginService;
 import com.learn.restpg.Service.Outcome;
 import com.learn.restpg.Service.StudentService;
@@ -32,6 +33,18 @@ public class StudentController {
         log.trace("Inside Generate Jwt api method.");
         return ResponseEntity.ok(loginService.genJwtOutcome(loginInfo));
 	}
+
+    @PostMapping(path="/adduser",consumes={"application/x-www-form-urlencoded","multipart/form-data" } )
+    public ResponseEntity<?> adduserEntity(UserInfo userInfo){
+        log.trace("Inside add user method.");
+        return ResponseEntity.ok(loginService.addUser(userInfo));
+    }
+    
+    @PostMapping(path="/adduser",consumes={ "application/json", "application/xml" } )
+    public ResponseEntity<?> adduserinjsonEntity(@RequestBody UserInfo userInfo){
+        log.trace("Inside add user method.");
+        return ResponseEntity.ok(loginService.addUser(userInfo));
+    }
 
     @PostMapping(path="/auth",consumes = { "application/json", "application/xml" })
     public ResponseEntity<?> authbyjsonEntity(@RequestBody LoginInfo loginInfo) throws Exception{
